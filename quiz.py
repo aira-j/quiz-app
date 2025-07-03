@@ -1,9 +1,9 @@
 print("👋 welcome to the quiz")
 a=input("do you want to start(y/n): ")
-if a in "n":
+if a.lower()=="n":
     print("see you next time")
 
-elif a in "y":
+elif a.lower()=="y":
     print("🚀 Let's begin")
     name=input("enter your name: ")
     print("hi", name, "let's begin your quiz")
@@ -23,15 +23,23 @@ elif a in "y":
         print("🔹B: ", i["B"])
         print("🔹C: ", i["C"])
         print("🔹D: ", i["D"])
-        ans=input("your answer (A/B/C/D/skip): ")
-        if ans.upper() == i["answer"]:
-            score+=1
-            print("✅ Yay! you got it right")
-        elif ans in "skip":
-            print("⏭️ let's move to the next question")
-        else:
-            print("❌ Oops you got it wrong! the correct ans was:", i["answer"])
-        q+=1
+        validans=["A","B","C","D","SKIP"]
+        while True:
+            ans=input("your answer (A/B/C/D/skip): ").strip().upper()
+            
+            if ans in validans:
+                if ans == i["answer"]:
+                    score+=1
+                    print("✅ Yay! you got it right")
+                elif ans == "SKIP":
+                    print("⏭️ let's move to the next question")
+                else:
+                    print("❌ Oops you got it wrong! the correct ans was:", i["answer"])
+                q+=1
+                break
+            else:
+                print("enter a valid input")
+                
     
     print(name, "your final score is:", score)
     if score==5:
@@ -41,6 +49,9 @@ elif a in "y":
     else:
         print("🤞 try again")
     print("thanks for playing")
+
+else:
+    print("invalid input- try again")
         
 
 
